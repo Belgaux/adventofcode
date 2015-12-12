@@ -1,14 +1,37 @@
-from day03.solution import Santa
+class Santa():
+    def __init__(self):
+        self.x = 0
+        self.y = 0
 
-class RoboSanta(Santa):
-    def __init__(self, x=0, y=0):
-        super().__init__(x, y)
-
-    def move():
-        pass
+    def move(self, direction):
+        if direction == '^':
+            self.y += 1
+        elif direction == 'v':
+            self.y -= 1
+        elif direction == '<':
+            self.x -= 1
+        elif direction == '>':
+            self.x += 1
+        self.pos = (self.x, self.y)
 
 def main():
-    s = Santa()
-    s.move('^')
-    r = RoboSanta()
-    print("asd")
+    houses = {}
+    santa = Santa()
+    robot = Santa()
+
+    stack = []
+    with open("input.txt") as f:
+        for d in f.read().strip('\n'):
+            stack.append(d)
+    stack.reverse()
+    while stack:
+        if stack:
+            santa.move(stack.pop())
+            houses[santa.pos] = True
+        if stack:
+            robot.move(stack.pop())
+            houses[robot.pos] = True
+    print("houses with at least 1 present: ", len(houses))
+
+if __name__ == "__main__":
+    main()
