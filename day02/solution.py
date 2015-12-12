@@ -12,6 +12,6 @@ with open("input.txt") as f:
     for present in f.readlines():
         # get dimensions
         args = map(int, present.split('x'))
-        # unpack list into function
+        # unpack map into function
         total += surface_area(*args)
     print("Total square feet of paper: ", total)

@@ -12,6 +12,6 @@ with open("input.txt") as f:
     for present in f.readlines():
         # get dimensions
         args = map(int, present.split('x'))
-        # unpack list into function
+        # unpack map into function
         total += ribbon_length(*args)
     print("Total feet of ribbon: ", total)
