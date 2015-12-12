@@ -30,6 +30,5 @@ def main():
                 nice_count += 1
     print(nice_count)
 
-
 if __name__ == '__main__':
     main()
