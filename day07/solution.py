@@ -1,40 +1,48 @@
+ASSIGNMENT = '->'
+
+def parse_instruction(inst):
+    operand_one = None
+    operand_two = None
+    operator = None
+    output = None
+    print(inst.split(" "))
+    params = inst.split(" ")
+
+    if params[1] == ASSIGNMENT:
+        operand_one = params[0]
+        operand_two = params[2]
+        # assign operand_one -> operand_two
+        wires[operand_two] = operand_one
+    elif params[0] == 'NOT':
+        operator = 'NOT'
+        operand_one = params[1]
+        output = params[3]
+        wires[output] = ALU(op1=operand_one, operator=operator)
+    elif params[3] == ASSIGNMENT:
+        operand_one = params[0]
+        operator    = params[1]
+        operand_two = params[2]
+        output      = params[4]
+    print(operand_one, operand_two, operator, output)
+
+def ALU(op1=None, op2=None, operator=None):
+    if operator == 'AND':
+        return int(op1 & op2)
+    elif operator == 'OR':
+        return int(op1 | op2)
+    elif operator == 'LSHIFT':
+        return int(op1 << op2)
+    elif operator == 'RSHIFT':
+        return int(op1 >> op2)
+    else:
+        return ~op1
+
+
+wires = {}
 inputs = []
+
 with open("input.txt") as f:
     inputs = f.read().splitlines()
 
-class Wire():
-    def __init__(self, input, output):
-        self.input = input
-        self.output = output
-
-class ControlUnit():
-    def __init__(self):
-
-class ALU():
-
-    operators = ("AND", "OR", "NOT", "LSHIFT", "RSHIFT")
-
-    def __init__(self, op1, op2, operator):
-        self.op1 = op1
-        self.op2 = op2
-        self.operator = operator
-
-    def decode_instruction(self, args):
-        print(args)
-
-    def left_shift(self, op1, op2):
-        return op1 << op2
-
-class Circuit():
-    def __init__(self):
-        self.wires = {}
-
-
-def main():
-    a = ALU()
-    print(inputs[1])
-    a.decode_instruction(["123", "->", "x"])
-    print(a.left_shift())
-
-if __name__ == '__main__':
-    main()
+for line in inputs:
+    parse_instruction(line)
