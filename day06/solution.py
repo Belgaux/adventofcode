@@ -34,8 +34,6 @@ def main():
     for input in inputs:
         parse_input(input)
     # count number of lights 'on'
-    for line in grid:
-        print(grid[line])
     lights_on = 0
     for i in range(1000):
             for j in range(1000):
