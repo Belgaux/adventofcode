@@ -6,10 +6,9 @@ pattern1 = re.compile(r"(.).\1")
 pattern2 = re.compile(r"(..).*\1")
 
 def is_nice(string):
-    if pattern1.search(string) is None or pattern2.search(string) is None:
-        return False
-    # true if both patterns match
-    return True
+    return False if (
+        pattern1.search(string) is None or pattern2.search(string) is None
+    ) else True
 
 def main():
     nice_count = 0
