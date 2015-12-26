@@ -1,8 +1,3 @@
-# initialize grid with lights off
-grid = {}
-for i in range(1000):
-   grid[i] = [0 for _ in range(1000)]
-
 def parse_input(input):
     inst = input.split()
     if "toggle" in inst:
@@ -28,6 +23,10 @@ def switch_lights(start, stop, mode):
                     grid[i][j] = 0
 
 def main():
+    # initialize grid with lights off
+    grid = {}
+    for i in range(1000):
+       grid[i] = [0 for _ in range(1000)]
     with open("../inputs/input6.txt") as f:
         inputs = f.read().splitlines()
     # setup lights
