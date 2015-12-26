@@ -1,4 +1,4 @@
-with open("input.txt") as f:
+with open("../inputs/input1.txt") as f:
     floor = 0;
     for i, char in enumerate(f.read()):
         if floor == -1:

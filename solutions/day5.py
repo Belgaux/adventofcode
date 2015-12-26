@@ -24,7 +24,7 @@ def is_nice(string):
 
 def main():
     nice_count = 0
-    with open("input.txt") as f:
+    with open("../inputs/input5.txt") as f:
         for string in f.readlines():
             if is_nice(string):
                 nice_count += 1

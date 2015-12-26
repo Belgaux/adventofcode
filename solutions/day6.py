@@ -1,4 +1,4 @@
-# initialize grid with brightness 0
+# initialize grid with lights off
 grid = {}
 for i in range(1000):
    grid[i] = [0 for _ in range(1000)]
@@ -16,32 +16,30 @@ def parse_input(input):
     stop = [int(x) for x in inst[b].split(",")]
     switch_lights(start, stop, mode)
 
-'''
-Only major change in part 2 is in here
-'''
 def switch_lights(start, stop, mode):
     for i in range(start[0], stop[0] + 1):
             for j in range(start[1], stop[1] + 1):
                 if mode == "toggle":
-                    grid[i][j] += 2
+                    # fun way to toggle between 1 & 0
+                    grid[i][j] = int(not grid[i][j])
                 elif mode == "on":
-                    grid[i][j] += 1
+                    grid[i][j] = 1
                 elif mode == "off":
-                    if grid[i][j] > 0:
-                        grid[i][j] -= 1
+                    grid[i][j] = 0
 
 def main():
-    with open("input.txt") as f:
+    with open("../inputs/input6.txt") as f:
         inputs = f.read().splitlines()
     # setup lights
     for input in inputs:
         parse_input(input)
-    # calculate total brightness
-    brightness = 0
+    # count number of lights 'on'
+    lights_on = 0
     for i in range(1000):
             for j in range(1000):
-                brightness += grid[i][j]
-    print("Total brightness: ", brightness)
+                if grid[i][j] == 1:
+                    lights_on += 1
+    print("Lights on count: ", lights_on)
 
 if __name__ == '__main__':
     main()

@@ -17,20 +17,10 @@ class Santa():
 def main():
     houses = {}
     santa = Santa()
-    robot = Santa()
-
-    stack = []
-    with open("input.txt") as f:
+    with open("../inputs/input3.txt") as f:
         for d in f.read().strip('\n'):
-            stack.append(d)
-    stack.reverse()
-    while stack:
-        if stack:
-            santa.move(stack.pop())
+            santa.move(d)
             houses[santa.pos] = True
-        if stack:
-            robot.move(stack.pop())
-            houses[robot.pos] = True
     print("houses with at least 1 present: ", len(houses))
 
 if __name__ == "__main__":
