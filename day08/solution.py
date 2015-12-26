@@ -1,31 +1,13 @@
 
 def main():
-    total_char_num = 0
+    """
+    Get the difference between the length of
+    the raw strings and the evaluated strings in memory
+    """
     with open("input.txt") as f:
-        text = f.read().splitlines()
-    for line in text:
-        # add the untouched char code count
-        total_char_num += len(line)
-        s = line[1:-1]
-        print(s)
-        print(len(s))
-        # temporarily subtract everything
-        total_char_num -= len(s)
-        # add back the unicode conversions and escaped codes
-        for i in range(len(s)-1):
-            print(i,s[i:i+2])
-            if s[i:i+2] == "\\x":
-                # 4 chars become 1 unicode char, add difference
-                print(True)
-                total_char_num += 3
-            # escaping a backslash might happen
-            elif s[i] == "\\" and s[i+1] != ("x" or "\\"):
-                print(True)
-                total_char_num += 1
-
-        # remove escape characters
-    print(total_char_num)
-
+        lines = f.read().splitlines()
+    # eval() does all the work for me here, converting escape literals and unicode
+    print(sum(len(l) - len(eval(l)) for l in lines))
 
 if __name__ == '__main__':
     main()
