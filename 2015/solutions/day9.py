@@ -30,14 +30,15 @@ def main():
     # all permutations
     from itertools import permutations
     all_paths = permutations(locations)
+
     # compute path costs
     path_costs = []
     for path in all_paths:
-        cost = 0
+        edges = []
         for i in range(0, len(path)-1):
-            edge = (path[i], path[i+1])
-            cost += costs[edge]
-        path_costs += [cost]
+            edges.append((path[i], path[i+1]))
+        path_costs += [sum([costs[edge] for edge in edges])]
+        
     print("Shortest route: {}".format(min(path_costs)))
     print("Longest route: {}".format(max(path_costs)))
         
