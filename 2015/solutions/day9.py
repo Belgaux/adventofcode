@@ -1,5 +1,5 @@
+from itertools import permutations
 
-  
 def main():
     """Solution: 
        1. Make a table of all edges with costs
@@ -28,7 +28,6 @@ def main():
             costs[(args[2], args[0])] = int(args[4])
     
     # all permutations
-    from itertools import permutations
     all_paths = permutations(locations)
 
     # compute path costs
