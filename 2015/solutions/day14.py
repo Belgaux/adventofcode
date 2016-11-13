@@ -6,12 +6,12 @@ class Reindeer(object):
         self.fuel = self.max_fuel
         self.rest_duration = rest_duration # in seconds
         self.rested_amount = 0
-        self.distance_travelled = 0
+        self.distance = 0
         
     def tick(self):
         if self.fuel > 0:
             self.fuel -= 1
-            self.distance_travelled += self.speed
+            self.distance += self.speed
         else:
             self.rest()
           
@@ -24,15 +24,6 @@ class Reindeer(object):
             self.rested_amount += 1
                 
 def simulate_race(reindeer, length=1000):
-    def get_leader():
-        leader = [reindeer[0]]
-        for r in reindeer:
-            if r.distance_travelled > leader[0].distance_travelled:
-                leader = [r]
-            elif r.distance_travelled == leader[0].distance_travelled:
-                leader.append(r)
-        return leader
-                
     leaderboard = {}
     for r in reindeer:
         leaderboard[r] = 0
@@ -40,12 +31,13 @@ def simulate_race(reindeer, length=1000):
     for _ in range(length):
         for r in reindeer:
             r.tick()
-        leader = get_leader()
+        leader = [r for r in reindeer \
+            if r.distance == max(reindeer, key=lambda x: x.distance).distance]
         for l in leader:
             leaderboard[l] += 1
         
-    #winner = max(reindeer_list, key=lambda x: x.distance_travelled)    
-    #print("Winner is {} with {} km travelled.".format(winner.name, winner.distance_travelled))
+    #winner = max(reindeer_list, key=lambda x: x.distance)    
+    #print("Winner is {} with {} km travelled.".format(winner.name, winner.distance))
 
     winner = max(leaderboard, key=lambda x: leaderboard[x])    
     print("Winner is {} with {} points.".format(winner.name, leaderboard[winner]))
