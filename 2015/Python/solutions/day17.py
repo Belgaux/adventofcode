@@ -1,26 +1,29 @@
 def main():
     containers = [int(line.strip()) \
             for line in open("../inputs/input17.txt").readlines()]
-    combinations = []
-    
-    def subset_sum(values, max, partial=[]):
-        if sum(partial) == max:
-            combinations.append(partial)
-        if sum(partial) >= max:
+    combs = []
+
+    def subset_sum(values, target, partial):
+        """Find every subset of values that sum up to target value
+        """
+        if sum(partial) == target:
+            combs.append(partial)
+        if sum(partial) >= target:
             return
-        for i in range(len(values)):
+        for i, value in enumerate(values):
             remaining = values[i + 1:]
-            subset_sum(remaining, max, partial + [values[i]])
-            
+            subset_sum(remaining, target, partial + [value])
+
+
     # part 1
-    subset_sum(containers, 150)
-    print(len(combinations))
-    
+    subset_sum(containers, 150, [])
+    print(len(combs))
+
     # part 2
-    new_combinations = [c for c in combinations \
-                        if len(c) == min(map(len, combinations))]
-    print(len(new_combinations))
-    
-                   
+    new_combs = [c for c in combs \
+                        if len(c) == min(map(len, combs))]
+    print(len(new_combs))
+
+
 if __name__ == "__main__":
     main()

@@ -1,11 +1,11 @@
-class Recipe(object):  
+class Recipe(object):
     p = {
         "Frosting":     [4,-2,0,0,5],
         "Candy":        [0,5,-1,0,8],
         "Butterscotch": [-1,0,5,0,6],
         "Sugar":        [0,0,-2,2,1]
     }
-    
+
     def __init__(self, frosting, candy, butterscotch, sugar):
         self.cap = self.cost(0, frosting, candy, butterscotch, sugar)
         if self.cap < 0:
@@ -21,17 +21,17 @@ class Recipe(object):
             self.texture = 0
         self.calories = self.cost(4, frosting, candy, butterscotch, sugar)
         self.compute_score()
-        
+
     def cost(self, property_nr, frosting, candy, butterscotch, sugar):
         return Recipe.p["Frosting"][property_nr] * frosting \
                 + Recipe.p["Candy"][property_nr] * candy \
                 + Recipe.p["Butterscotch"][property_nr] * butterscotch \
                 + Recipe.p["Sugar"][property_nr] * sugar \
-      
+
     def compute_score(self):
         self.score = self.cap * self.dur * self.flavor * self.texture
 
-        
+
 def main():
     # BRUTE FORCE EVERYTHING
     teaspoons = 100
@@ -45,8 +45,7 @@ def main():
                 if recipe.score > max and recipe.calories == 500:
                     max = recipe.score
     print(max)
-    
-    
+
+
 if __name__ == "__main__":
     main()
-    
