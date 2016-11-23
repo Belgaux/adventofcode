@@ -1,7 +1,7 @@
 def main():
-    with open("../inputs/input1.txt") as f:
-        floor = 0;
-        for i, char in enumerate(f.read()):
+    with open("../inputs/input1.txt") as in_file:
+        floor = 0
+        for i, char in enumerate(in_file.read()):
             # part 2
             if floor == -1:
                 print("First floor -1 index: ", i)
