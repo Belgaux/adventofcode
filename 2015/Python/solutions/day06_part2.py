@@ -1,3 +1,5 @@
+grid = {}
+
 def parse_input(input):
     inst = input.split()
     if "toggle" in inst:
@@ -17,6 +19,7 @@ Only major change in part 2 is in here
 def switch_lights(start, stop, mode):
     for i in range(start[0], stop[0] + 1):
             for j in range(start[1], stop[1] + 1):
+                global grid
                 if mode == "toggle":
                     grid[i][j] += 2
                 elif mode == "on":
@@ -27,7 +30,6 @@ def switch_lights(start, stop, mode):
 
 def main():
     # initialize grid with brightness 0
-    grid = {}
     for i in range(1000):
         grid[i] = [0 for _ in range(1000)]
 
