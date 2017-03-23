@@ -5,7 +5,8 @@ def is_real(room):
     first_digit = re.search("\d", room).start()
     sector_id = int(room[first_digit:first_digit+3])
     checksum = room[-6:-1]
-    name_string = "".join(room[:first_digit-1].split("-"))
+    name = room[:first_digit-1]
+    name_string = "".join(name.split("-"))
 
     d = defaultdict(int)
     for c in name_string:
@@ -18,11 +19,30 @@ def is_real(room):
     s2 = sorted(s1, key=lambda x: x[1], reverse=True)
 
     common = "".join([t[0] for t in s2[:5]])
-    return common == checksum, sector_id
+    return common == checksum, sector_id, name
 
 
 ids = [is_real(line.strip()) for line in open("../inputs/04.txt")]
 real_ids = list(filter(lambda x: x[0] is True, ids))
 # Sum of sector IDs of the real rooms
 print(sum(t[1] for t in real_ids))
+
+
+# Part 2 
+import string
+
+def decode(name, key):
+    alphabet = string.ascii_lowercase
+    new = []
+    for c in name:
+        if c != "-":
+            # Shift cipher
+            new.append(alphabet[(key + alphabet.index(c))
+                                    % len(alphabet)])
+        else:
+            new.append(" ")
+    return "".join(new)
+
+decrypted = [(s_id, decode(name, s_id)) for _, s_id, name in real_ids]
+print([d for d in decrypted if "northpole" in d[1]])
 
