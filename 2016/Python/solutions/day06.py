@@ -7,4 +7,7 @@ for col in cols:
     d = defaultdict(int)
     for c in col:
         d[c] += 1
-    print(max(d.items(), key=lambda x: x[1]))
+    # part 1
+    #print(max(d.items(), key=lambda x: x[1]))
+    # part 2
+    print(min(d.items(), key=lambda x: x[1]))
