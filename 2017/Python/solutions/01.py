@@ -23,4 +23,4 @@ assert(captcha_sum_halfway("12131415") == 4)
 with open("../inputs/01.txt") as f:
   puzzle_seq = f.read().strip()
   print(captcha_sum(puzzle_seq))
-  print(captcha_sum_halfwa(puzzle_seq))
+  print(captcha_sum_halfway(puzzle_seq))
