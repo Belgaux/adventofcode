@@ -8,14 +8,15 @@ def step_length(move, k):
   return moves[move]
 
 def next_coords(coords, move):
+  x, y = coords
   if move == "R":
-    return (coords[0]+1, coords[1])
+    return (x+1, y)
   elif move == "U":
-    return (coords[0], coords[1]+1)
+    return (x, y+1)
   elif move == "L":
-    return (coords[0]-1, coords[1])
+    return (x-1, y)
   elif move == "D":
-    return (coords[0], coords[1]-1)
+    return (x, y-1)
 
 def number_spiral_coords(n):
   """Generate a number spiral to find coordinates of number n"""
@@ -27,8 +28,7 @@ def number_spiral_coords(n):
   done = False
   while (not done):
     for move in move_order:
-      l = step_length(move, current_block)
-      for _ in range(l):
+      for _ in range(step_length(move, current_block)):
         current_coords = next_coords(current_coords, move)
         current_square += 1
         if current_square == n:
