@@ -25,8 +25,9 @@ with open("../inputs/06.txt") as f:
     print(mem)
     mem = redistribute(mem)
     if mem in seen:
-      print(i)
+      print("Redistributions before finding infinite loop=", i)
+      print("Cycles in infinite loop=", i - seen[mem])
       break
     else:
-      seen[mem] += 1
+      seen[mem] = i
 
