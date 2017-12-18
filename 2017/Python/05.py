@@ -3,7 +3,10 @@ def escape(maze):
   sp = 0
   while 0 <= sp < len(maze):
     offset = maze[sp]
-    maze[sp] += 1
+    if offset >= 3:
+      maze[sp] -= 1
+    else:
+      maze[sp] += 1
     sp += offset
     steps_taken += 1
   return steps_taken
