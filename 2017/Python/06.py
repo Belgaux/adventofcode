@@ -1,4 +1,3 @@
-import collections
 import itertools
 
 def redistribute(mem):
@@ -20,7 +19,7 @@ def redistribute(mem):
 
 with open("../inputs/06.txt") as f:
   mem = tuple(int(e) for e in f.read().split("\t"))
-  seen = collections.defaultdict(int)
+  seen = dict()
   for i in itertools.count(1):
     print(mem)
     mem = redistribute(mem)
